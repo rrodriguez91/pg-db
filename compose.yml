@@ -1,0 +1,26 @@
+services:
+  pg-db:
+    image: postgres:15
+    container_name: pg-db
+    restart: always
+
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+      TZ: America/Managua
+
+    volumes:
+      - data:/var/lib/postgresql/data
+    networks:
+      - pg-network
+    ports:
+      - "5432:5432"
+
+volumes:
+  data:
+    name: pg-data
+
+networks:
+  pg-network:
+    external: true    
